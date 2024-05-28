@@ -32,9 +32,13 @@ class CandyController extends Controller
 
     public function store(StoreCandyRequest $request)
     {
-        $imageData = file_get_contents($request->file('img')->getRealPath());
+        if ($request->hasFile('img')) {
+            $imageData = file_get_contents($request->file('img')->getRealPath());
+        }
         $input = $request->all();
-        $input['img'] = $imageData;
+        if ($request->hasFile('img')) {
+            $input['img'] = $imageData;
+        }
 
         Candy::create($input);
 
@@ -73,9 +77,13 @@ class CandyController extends Controller
         if (! Gate::allows('is-admin')) {
             abort(403);
         }
-        $imageData = file_get_contents($request->file('img')->getRealPath());
+        if ($request->hasFile('img')) {
+            $imageData = file_get_contents($request->file('img')->getRealPath());
+        }
         $input = $request->all();
-        $input['img'] = $imageData;
+        if ($request->hasFile('img')) {
+            $input['img'] = $imageData;
+        }
         $candy->update($input);
         return redirect()->route('candies.index')->with('success', 'Candy updated successfully');
 
