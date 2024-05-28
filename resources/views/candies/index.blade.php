@@ -2,23 +2,17 @@
 
 @include('shared.head', ['pageTitle' => 'Słodycze'])
 
-<body>
-    @include('shared.navbar')
-
     
         @include('shared.session-error')
-        <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sweets</title>
-    <!-- Dodaj style Bootstrap -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-</head>
 <body>
-    <div class="container mt-5">
+@include('shared.navbar')
+    <div class="container mt-5 mb-5">
+    @include('shared.session-error')
         <h1 class="text-center mb-5">Słodycze</h1>
+        @can('is-admin')
+        <a href="{{ route('candies.create') }}" class="btn btn-primary mb-3">Dodaj nowy</a>
+        @endcan 
+        @include('shared.validation-error')
         <div class="row">
             @foreach($candies as $candy)
                 <div class="col-md-4 mb-4">
@@ -26,12 +20,11 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ $candy->name }}</h5>
                             <img src="data:image/jpeg;base64,{{ base64_encode($candy->img) }}" class="card-img-top" alt="Obrazek słodyczy">
-
                             <p class="card-text"><strong>Rodzaj:</strong> {{ $candy->type }}</p>
-                            <!--<p class="card-text"><strong>Brand:</strong> {{ $candy->brand }}</p>-->
                             <p class="card-text"><strong>Cena:</strong>{{ $candy->price }} zł/kg</p>
                             <p class="card-text"><strong>Ocena:</strong> {{ $candy->rating }}</p>
-                            <a href="#" class="btn btn-primary">View More</a>
+                            <a href="{{ route('candies.show', $candy->id) }}" class="btn btn-primary">Pokaż szczegóły</a>
+                            
                         </div>
                     </div>
                 </div>

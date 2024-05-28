@@ -20,8 +20,7 @@ return new class extends Migration
             $table->decimal('price');
             $table->integer('stock');
             $table->decimal('rating');
-            $table->foreignIdFor(Supplier::class)->constrained();
-            $table->timestamps();
+            $table->foreignIdFor(Supplier::class)->constrained()->onDelete('cascade');
         });
         DB::statement("ALTER TABLE candies ADD img LONGBLOB");
 

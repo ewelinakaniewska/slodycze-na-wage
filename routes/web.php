@@ -1,26 +1,14 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CountryController;
-use App\Http\Controllers\TripController;
+use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\CandyController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
+Route::controller(CandyController::class)->group(function (){
+    Route::get('/', 'index')->name('candies.index');
 });
 
-Route::controller(TripController::class)->group(function () {
-    Route::get('/trips/image-upload', 'imageUpload')->name('trips.image_upload');
-    Route::post('/trips/image-upload', 'imageUploadStore')->name('trips.image_upload.store');
-    Route::get('/trips', 'index')->name('trips.index');
-    Route::get('/trips/{id}', 'show')->name('trips.show');
-    Route::get('/trips/{id}/edit', 'edit')->name('trips.edit');
-    Route::put('/trips/{id}', 'update')->name('trips.update');
-    Route::post('/trips/favourite', 'favourite')->name('trips.favourite');
-});
-
-Route::resource('countries', CountryController::class)->middleware('auth');
 
 Route::controller(AuthController::class)->group(function () {
     Route::get('/auth/login', 'login')->name('login');
@@ -28,6 +16,6 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('/auth/logout', 'logout')->name('logout');
 });
 
-Route::controller(CandyController::class)->group(function (){
-    Route::get('/candies', 'index')->name('candies.index');
-});
+Route::resource('candies', CandyController::class);
+Route::resource('suppliers', SupplierController::class);
+

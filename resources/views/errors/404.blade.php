@@ -4,7 +4,7 @@
 
 <style>
     body {
-        background-image: url("../../img/carousel2.jpg");
+        background-color: lightpink;
     }
 </style>
 

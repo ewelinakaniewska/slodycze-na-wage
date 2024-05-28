@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Candy;
+use App\Http\Requests\UpdateCandyRequest;
+use App\Http\Requests\StoreCandyRequest;
+use Illuminate\Support\Facades\Gate;
+use App\Models\Supplier;
 class CandyController extends Controller
 {
     public function index()
@@ -18,19 +22,23 @@ class CandyController extends Controller
      */
     public function create()
     {
-        Debugbar::warning('Watch out…');
-        return view('candies.create');
+        if (! Gate::allows('is-admin')) {
+            abort(403);
+        }
+
+        $suppliers = Supplier::all();
+        return view('candies.create', ['suppliers' => $suppliers]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreCandyRequest $request)
     {
+        $imageData = file_get_contents($request->file('img')->getRealPath());
         $input = $request->all();
+        $input['img'] = $imageData;
+
         Candy::create($input);
 
-        return redirect()->route('candy.index');
+        return redirect()->route('candies.index')->with('success', 'Candy created successfully');
     }
 
     /**
@@ -38,8 +46,8 @@ class CandyController extends Controller
      */
     public function show($id)
     {
-        $sweets = Sweet::all();
-        return view('sweets.show', compact('sweets'));
+        $candy = Candy::findOrFail($id);
+        return view('candies.show', compact('candy'));
     }
 
     /**
@@ -47,7 +55,10 @@ class CandyController extends Controller
      */
     public function edit(Candy $candy)
     {
-        return view('candies.edit', ['candy' => $candies]);
+        if (! Gate::allows('is-admin')) {
+            abort(403);
+        }
+        return view('candies.edit', ['candy' => $candy]);
     }
 
     /**
@@ -59,11 +70,15 @@ class CandyController extends Controller
         //     abort(403);
         // }
 
-        Gate::authorize('update', $candy);
-
+        if (! Gate::allows('is-admin')) {
+            abort(403);
+        }
+        $imageData = file_get_contents($request->file('img')->getRealPath());
         $input = $request->all();
+        $input['img'] = $imageData;
         $candy->update($input);
-        return redirect()->route('candies.index');
+        return redirect()->route('candies.index')->with('success', 'Candy updated successfully');
+
     }
 
     /**
@@ -71,7 +86,10 @@ class CandyController extends Controller
      */
     public function destroy(Candy $candy)
     {
-        $country->delete();
+        if (! Gate::allows('is-admin')) {
+            abort(403);
+        }
+        $candy->delete();
         return redirect()->route('candies.index');
     }
 }

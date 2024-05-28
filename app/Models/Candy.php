@@ -10,11 +10,11 @@ class Candy extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'type', 'ingredients', 'price', 'img', 'stock', 'rating', 'supplier_id'];
+    protected $fillable = ['name', 'type', 'ingredients', 'price', 'stock', 'rating', 'supplier_id', 'img'];
 
     public $timestamps = false;
 
-    public function suppliers(): BelongsTo
+    public function supplier(): BelongsTo
     {
         return $this->belongsTo(Supplier::class);
     }
