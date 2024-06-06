@@ -39,8 +39,8 @@
                 <button class="btn btn-secondary dropdown-toggle " type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">Panel administratora</button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
                     <li><a href="{{ route('users.edit', Auth::user()->id) }}" class="dropdown-item" type="button">Ustawienia konta</a></li>
-                    <li><a href="{{ route('users.index'), 2 }}" class="dropdown-item" type="button">Zarządzaj użytkownikami</a></li>
-                    <li><a href="{{ route('orders.index'), 2 }}" class="dropdown-item" type="button">Zarządzaj zamówieniami</a></li>
+                    <li><a href="{{ route('users.index', 2)}}" class="dropdown-item" type="button">Zarządzaj użytkownikami</a></li>
+                    <li><a href="{{ route('orders.index', 2)}}" class="dropdown-item" type="button">Zarządzaj zamówieniami</a></li>
                 </ul>
             </div>
             @endif

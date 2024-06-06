@@ -30,6 +30,7 @@ return [
     'email' => 'Pole :attribute musi być prawidłowym adresem e-mail.',
     'ends_with' => 'Pole :attribute musi kończyć się jednym z następujących: :values.',
     'exists' => 'Wybrane pole :attribute jest nieprawidłowe.',
+
     'file' => 'Pole :attribute musi być plikiem.',
     'filled' => 'Pole :attribute musi mieć wartość.',
     

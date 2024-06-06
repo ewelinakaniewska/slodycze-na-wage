@@ -16,26 +16,26 @@ use Illuminate\Support\Facades\DB;
 class OrderController extends Controller
 {
     public function index()
-    {
-        if (Gate::allows('is-admin')) {
-            $orderCount = Order::count();
-            $orders = Order::all();
-            $currentMonthOrders = $orders->filter(function ($order) {
-                return $order->date->isCurrentMonth();
-            });
-            $totalOrders = $currentMonthOrders->count(); 
-            $totalAmount = $currentMonthOrders->sum('total_amount');
-            if ($totalOrders > 0) {
-                $averageOrderValue = $totalAmount / $totalOrders;
-            } else {
-                $averageOrderValue = 0;
-            }
+{
+    if (Gate::allows('is-admin')) {
+        $orderCount = Order::count();
+        $orders = Order::all();
+        $currentMonthOrders = $orders->filter(function ($order) {
+            return $order->date->isCurrentMonth();
+        });
+        
+        $totalOrders = $currentMonthOrders->count(); 
+        $totalAmount = $currentMonthOrders->sum('total_amount');
+        
+        if ($totalOrders > 0) {
+            $averageOrderValue = $totalAmount / $totalOrders;
             $lastOrderDate = $currentMonthOrders->max('date')->format('Y-m-d');
-
+            
             $mostOrderedProduct = $currentMonthOrders->flatMap(function ($order) {
                 return $order->candies->pluck('name')->toArray(); 
-            })->countBy()->sortDesc(); 
+            })->countBy()->sortDesc();
 
+            $candyQuantities = [];
             foreach ($currentMonthOrders as $order) {
                 foreach ($order->candies as $candy) {
                     if (isset($candyQuantities[$candy->name])) {
@@ -47,7 +47,15 @@ class OrderController extends Controller
             }
             $labels = array_keys($candyQuantities);
             $data = array_values($candyQuantities);
-            return view('orders.index', [
+        } else {
+            $averageOrderValue = 0;
+            $lastOrderDate = null;
+            $mostOrderedProduct = collect();
+            $labels = [];
+            $data = [];
+        }
+
+        return view('orders.index', [
             'orders' => $orders,
             'orderCount' => $totalOrders,
             'totalAmount' => $totalAmount,
@@ -56,19 +64,20 @@ class OrderController extends Controller
             'mostOrderedProduct' => $mostOrderedProduct,
             'labels' => $labels, 
             'data' => $data
-            ]);
-
-        }
-        $user = Auth::user();
-        $orders = $user->orders;
-        $orderCount = $user->orders()->count();
-       
-        return view('orders.index', ['orders'=>$orders, 'orderCount'=>$orderCount]);
+        ]);
     }
+
+    $user = Auth::user();
+    $orders = $user->orders;
+    $orderCount = $user->orders()->count();
+   
+    return view('orders.index', ['orders' => $orders, 'orderCount' => $orderCount]);
+}
+
 
     public function show(Order $order)
     {
-        if (Auth::id() !== $order->user_id) {
+        if (Auth::id() !== $order->user_id && !Gate::allows('is-admin')) {
             abort(403, 'Brak dostępu');
         }
         else{
