@@ -26,7 +26,7 @@
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger">Usuń</button>
                                 </form>
-                            @endcan
+                        @endcan
                     </div>
                 </div>
             </div>

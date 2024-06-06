@@ -65,9 +65,20 @@ class SupplierController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Supplier $supplier)
+    public function destroy($id)
     {
+    $supplier = Supplier::findOrFail($id);
+
+        if ($supplier->candies()->count() > 0) {
+            return redirect()->back()->withErrors(['error' => 'Nie można usunąć dostawcy, ponieważ ma powiązane słodycze. Usuń najpierw słodycze, a następnie dostawcę.']);
+        }
+
+        $undeliveredOrders = $supplier->orders()->where('status', '!=', 'Dostarczone')->count();
+        if ($undeliveredOrders > 0) {
+            return redirect()->back()->withErrors(['error' => 'Nie można usunąć dostawcy, ponieważ ma powiązane zamówienia, które nie są dostarczone.']);
+        }
         $supplier->delete();
-        return redirect()->route('suppliers.index');
+
+        return redirect()->route('suppliers.index')->with('success', 'Dostawca został pomyślnie usunięty.');
     }
 }

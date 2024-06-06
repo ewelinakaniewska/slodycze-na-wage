@@ -32,6 +32,7 @@ return [
     'exists' => 'Wybrane pole :attribute jest nieprawidłowe.',
     'file' => 'Pole :attribute musi być plikiem.',
     'filled' => 'Pole :attribute musi mieć wartość.',
+    
     'gt' => [
         'numeric' => 'Pole :attribute musi być większe niż :value.',
         'file' => 'Pole :attribute musi być większe niż :value kilobajtów.',

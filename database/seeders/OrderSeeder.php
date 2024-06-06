@@ -29,8 +29,8 @@ class OrderSeeder extends Seeder
                 'payment_method' => $faker->randomElement(['Karta kredytowa', 'PayPal', 'Płatność za pobraniem']),
                 'total_amount' => $faker->randomFloat(2, 10, 1000),
                 'address' => $faker->address,
-                'created_at' => $faker->dateTimeThisYear(),
-                'updated_at' => $faker->dateTimeThisYear(),
+                'created_at' => $faker->dateTimeThisYear()->format('Y-m-d H:i:s'),
+                'updated_at' => $faker->dateTimeThisYear()->format('Y-m-d H:i:s'),
             ]);
         }
     }

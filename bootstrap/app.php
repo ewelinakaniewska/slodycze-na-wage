@@ -14,7 +14,12 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        $middleware->alias([
+            'isAdmin' => \App\Http\Middleware\IsAdmin::class,
+        ]);
+        $middleware->alias([
+            'auth' => \App\Http\Middleware\Auth::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
 
@@ -32,5 +37,6 @@ return Application::configure(basePath: dirname(__DIR__))
 
             return back()->withError($e->getMessage())->withInput();
         });
+        
 
     })->create();

@@ -32,6 +32,30 @@ class CandyController extends Controller
 
     public function store(StoreCandyRequest $request)
     {
+        $existingCandy = Candy::withTrashed()->where('name', $request->name)->first();
+
+if ($existingCandy) {
+    
+    if ($existingCandy->trashed()) {
+        $existingCandy->restore();
+            if ($request->hasFile('img')) {
+                $imageData = file_get_contents($request->file('img')->getRealPath());
+            }
+            $input = $request->all();
+            if ($request->hasFile('img')) {
+                $input['img'] = $imageData;
+            }
+            $existingCandy->update($input);
+       
+
+        return redirect()->route('candies.index')->with('success', 'Przywrócono wcześniej usunięty produkt.');
+    } else {
+
+        return redirect()->back()->withErrors(['name' => 'Produkt o tej nazwie już istniejeee.']);
+    }
+}
+
+        
         if ($request->hasFile('img')) {
             $imageData = file_get_contents($request->file('img')->getRealPath());
         }
@@ -70,9 +94,6 @@ class CandyController extends Controller
      */
     public function update(UpdateCandyRequest $request, Candy $candy)
     {
-        // if ($request->user()->cannot('update', $country)) {
-        //     abort(403);
-        // }
 
         if (! Gate::allows('is-admin')) {
             abort(403);
@@ -92,12 +113,24 @@ class CandyController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Candy $candy)
+    public function destroy($id)
     {
         if (! Gate::allows('is-admin')) {
             abort(403);
         }
+        $candy = Candy::findOrFail($id);
+
+        $undeliveredOrdersCount = $candy->orders()->where(function ($query) {
+            $query->where('status', 'Opłacone')
+                  ->orWhere('status', 'Przygotowywane');
+        })->exists();
+
+        if ($undeliveredOrdersCount) {
+            return redirect()->back()->withErrors(['error' => 'Nie można usunąć produktu, ponieważ jest on w zamówieniach, które nie zostały jeszcze wysłane.']);
+        }
+        
         $candy->delete();
-        return redirect()->route('candies.index');
+
+        return redirect()->route('candies.index')->with('success', 'Produkt został pomyślnie usunięty.');
     }
 }

@@ -8,10 +8,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
+    public $timestamps = true;
 
     /**
      * The attributes that are mass assignable.
@@ -22,6 +24,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'img',
     ];
 
     /**
@@ -48,13 +51,11 @@ class User extends Authenticatable
     }
 
     public function isAdmin() : bool {
-        // $admin_role = Cache::rememberForever('admin_role', function () {
-        //     return DB::table('roles')->where('name', 'admin')->value('id');
-        // });
-
-        //return $this->role_id == $admin_role;
-
         return $this->role_id == 1;
+    }
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
     }
 
 }

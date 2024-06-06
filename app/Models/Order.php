@@ -4,6 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
+
+
 
 class Order extends Model
 {
@@ -35,19 +39,16 @@ class Order extends Model
         'updated_at' => 'datetime',
     ];
 
-    /**
-     * Get the user that owns the order.
-     */
-    public function user()
+
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    /**
-     * Define a relationship with the OrderItem model (if you have an OrderItem model/table).
-     */
-    public function items()
+  
+    public function candies()
     {
-        return $this->hasMany(OrderItem::class);
+        return $this->belongsToMany(Candy::class)->withPivot('quantity');
     }
+
 }

@@ -20,10 +20,12 @@ return new class extends Migration
             $table->decimal('price');
             $table->integer('stock');
             $table->decimal('rating');
-            $table->foreignIdFor(Supplier::class)->constrained()->onDelete('cascade');
+            $table->foreignIdFor(Supplier::class)->constrained();
         });
         DB::statement("ALTER TABLE candies ADD img LONGBLOB");
-
+        Schema::table('candies', function (Blueprint $table) {
+            $table->softDeletes();
+        });
     }
 
     /**

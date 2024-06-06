@@ -13,8 +13,6 @@
             <h1>Zaloguj się</h1>
         </div>
 
-        @include('shared.validation-error')
-
         <div class="row d-flex justify-content-center">
             <div class="col-10 col-sm-10 col-md-6 col-lg-4">
                 <form method="POST" action="{{ route('login.authenticate') }}" class="needs-validation" novalidate>

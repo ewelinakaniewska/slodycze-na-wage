@@ -7,6 +7,7 @@
 @include('shared.navbar')
 <div class="container mt-5">
     @include('shared.session-error')
+    @include('shared.validation-error')
     <div class="row">
         <div class="col-12">
             <h1>Lista Dostawców</h1>

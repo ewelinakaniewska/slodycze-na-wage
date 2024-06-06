@@ -23,12 +23,12 @@ class StoreCandyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|unique:candies,name,|max:50',
+            'name' => 'required|max:50',
             'type' => 'required|string|max:25',
             'ingredients' => 'required|string',
             'price' => 'required|numeric|between:0,9999.99',
             'stock' => 'required|integer|min:0',
-            'rating' =>'required|numeric|between:0,5'
+            'rating' =>'numeric|between:0,5'
         ];
     }
 }

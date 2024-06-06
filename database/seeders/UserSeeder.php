@@ -17,27 +17,28 @@ class UserSeeder extends Seeder
         User::insert(
             [
                 [
-                    'name' => 'Jan', 'email' => 'jan@email.com', 'password' => Hash::make('1234'),
-                     'role_id' => 1,
+                    'name' => 'Jan', 'email' => 'jan@email.com', 'password' => Hash::make('1234'), 'img' => file_get_contents(public_path('storage/img/redcandydrops.jpg')),
+                     'role_id' => 1, 
                 ],
                 [
-                    'name' => 'Siu Hun', 'email' => 'siuhun@email.com', 'password' => Hash::make('1234'),
+                    'name' => 'Siu Hun', 'email' => 'siuhun@email.com', 'password' => Hash::make('1234'), 'img' => file_get_contents(public_path('storage/img/redcandydrops.jpg')),
                      'role_id' => 2,
                 ],
                 [
-                    'name' => 'Helmut', 'email' => 'helmut@email.com', 'password' => Hash::make('1234'),
+                    'name' => 'Helmut', 'email' => 'helmut@email.com', 'password' => Hash::make('1234'), 'img' => file_get_contents(public_path('storage/img/redcandydrops.jpg')),
                     'role_id' => 2,
                 ],
                 [
-                    'name' => 'Marta', 'email' => 'marta@email.com', 'password' => Hash::make('1234'),
+                    'name' => 'Marta', 'email' => 'marta@email.com', 'password' => Hash::make('1234'),  'img' =>file_get_contents(public_path('storage/img/redcandydrops.jpg')),
                      'role_id' => 2,
                 ],
                 [
-                    'name' => 'Bill', 'email' => 'bill@email.com', 'password' => Hash::make('1234'),
+                    'name' => 'Bill', 'email' => 'bill@email.com', 'password' => Hash::make('1234'),  'img' =>file_get_contents(public_path('storage/img/redcandydrops.jpg')),
                      'role_id' => 2,
                 ],
                 [
-                    'name' => 'Lilly', 'email' => 'lilly@email.com', 'password' => Hash::make('1234'),
+                    'name' => 'Lilly', 'email' => 'lilly@email.com', 'password' => Hash::make('1234'), 'img' =>file_get_contents(public_path('storage/img/redcandydrops.jpg')),
+                    'role_id' => 2,
                      'role_id' => 2,
                 ]
             ]

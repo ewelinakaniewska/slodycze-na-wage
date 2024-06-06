@@ -17,10 +17,9 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             UserSeeder::class,
             SupplierSeeder::class,
-           
-            
             CandySeeder::class,
             OrderSeeder::class,
+            CandyOrderSeeder::class,
         ]);
     }
 }
