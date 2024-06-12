@@ -49,6 +49,7 @@
             @endforeach
         </tbody>
     </table>
+
     </div>
 
     @can('is-admin')

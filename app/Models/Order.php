@@ -48,7 +48,7 @@ class Order extends Model
   
     public function candies()
     {
-        return $this->belongsToMany(Candy::class)->withPivot('quantity');
+        return $this->belongsToMany(Candy::class)->withPivot('quantity', 'price');
     }
 
 }

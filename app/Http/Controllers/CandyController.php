@@ -13,7 +13,8 @@ class CandyController extends Controller
     public function index()
     {
         return view('candies.index', [
-            'candies' => Candy::all()
+            'candies' => Candy::Paginate(10),
+            
         ]);
     }
 
@@ -51,7 +52,7 @@ if ($existingCandy) {
         return redirect()->route('candies.index')->with('success', 'Przywrócono wcześniej usunięty produkt.');
     } else {
 
-        return redirect()->back()->withErrors(['name' => 'Produkt o tej nazwie już istniejeee.']);
+        return redirect()->back()->withErrors(['name' => 'Produkt o tej nazwie już istnieje.']);
     }
 }
 

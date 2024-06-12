@@ -8,6 +8,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 use App\Models\User;
 use App\Policies\CountryPolicy;
+use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -32,6 +33,7 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('is-admin', function (User $user) {
             return $user->isAdmin();
         });
+        Paginator::useBootstrap();
 
         
         // Gate::before(function (User $user, string $ability) {

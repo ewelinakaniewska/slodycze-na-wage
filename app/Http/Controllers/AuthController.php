@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -14,6 +16,13 @@ class AuthController extends Controller
             return redirect()->route('candies.index');
         }
         return view('auth.login');
+    }
+    public function registerView()
+    {
+        if (Auth::check()) {
+            return redirect()->route('candies.index');
+        }
+        return view('auth.register');
     }
 
     /**
@@ -35,8 +44,27 @@ class AuthController extends Controller
         }
 
         return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
+            'email' => 'Błędny login lub hasło.',
         ])->onlyInput('email');
+    }
+    public function register(Request $request)
+    {
+        $request->validate([
+            'name' => ['required', 'string', 'max:50'],
+            'email' => ['required', 'string', 'email', 'max:100', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'role_id' => 2,
+        ]);
+
+        Auth::login($user);
+        $request->session()->regenerate();
+        return redirect()->route('candies.index');
     }
 
     public function logout(Request $request)

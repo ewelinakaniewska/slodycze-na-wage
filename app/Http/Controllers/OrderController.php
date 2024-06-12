@@ -19,7 +19,7 @@ class OrderController extends Controller
 {
     if (Gate::allows('is-admin')) {
         $orderCount = Order::count();
-        $orders = Order::all();
+        $orders =  Order::with(['candies', 'user'])->get();
         $currentMonthOrders = $orders->filter(function ($order) {
             return $order->date->isCurrentMonth();
         });
@@ -120,10 +120,14 @@ class OrderController extends Controller
         $input['date'] = Carbon::now();
         $input['user_id'] = auth()->id();
 
+
         foreach ($input['products'] as $productId => $quantity) {
-            if ($quantity == null) {
+            if ($quantity == 0) {
                 unset($input['products'][$productId]);
             }
+        }
+        if($input['products'] == null){
+            return redirect()->back()->withErrors(['products' => 'Musisz wybrac conajmniej jeden produkt.'])->withInput();
         }
         
         foreach ($input['products'] as $candyId => $quantity) {
@@ -139,14 +143,19 @@ class OrderController extends Controller
 
         $order = Order::create($input);
         
-
         foreach ($input['products'] as $candyId => $quantity) {
             $candy = Candy::findOrFail($candyId);
+            $price = $candy->price;
             $candy_quantity = $quantity;
-            $order->candies()->attach($candy, ['quantity' => $quantity]);
+            $order->candies()->attach($candyId, [
+                'quantity' => $quantity,
+                'price' => $price,
+            ]);
             $candy->stock -= $quantity;
             $candy->save();
+            echo $candy->name;
         }
+
 
         return redirect()->route('orders.index')->with('success', 'Zamówienie zostało złożone pomyślnie.');
     }

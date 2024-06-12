@@ -129,5 +129,6 @@ return [
         'rating' => 'ocena',
         'supplier_id' => 'dostawca',
         'img' => 'zdjęcie',
+        'password' => 'hasło',
     ],
 ];

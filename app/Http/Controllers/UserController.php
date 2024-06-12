@@ -56,7 +56,7 @@ class UserController extends Controller
     public function destroy($id)
     { 
         $user = User::findOrFail($id);
-        if ($user->role_id === 1) { 
+        if ($user->role_id == 1) { 
             return Redirect::back()->withErrors(['message' => 'Nie można usunąć konta administratora.']);
         }
         $user->delete();

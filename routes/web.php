@@ -13,11 +13,16 @@ Route::controller(CandyController::class)->group(function (){
     Route::get('/', 'index')->name('candies.index');
 });
 
+Route::get('/faq', function () {
+    return view('faq');
+})->name('faq');
 
 Route::controller(AuthController::class)->group(function () {
     Route::get('/auth/login', 'login')->name('login');
     Route::post('/auth/login', 'authenticate')->name('login.authenticate');
     Route::get('/auth/logout', 'logout')->name('logout');
+    Route::get('/auth/register', [AuthController::class, 'registerView'])->name('register');
+    Route::post('/auth/register', [AuthController::class, 'register'])->name('register.register');           
 });
 
 

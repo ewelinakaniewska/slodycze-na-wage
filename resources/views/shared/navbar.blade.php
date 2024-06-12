@@ -9,6 +9,8 @@
             <li class="nav-item">
                 <a class="nav-link @if (str_contains(request()->path(), 'suppliers')) active @endif"
                     href="{{ route('suppliers.index') }}">Dostawcy</a>
+            </li>  <li class="nav-item">
+                <a class="nav-link " href="{{ route('faq') }}">FAQ</a>
             </li>
         </ul>
         <ul id="navbar-user" class="navbar-nav mb-2 mb-lg-0 ">
@@ -22,6 +24,11 @@
             @else
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('login') }}">Zaloguj się...</a>
+                </li>
+            @endif
+            @if (!Auth::check())
+            <li class="nav-item">
+                    <a class="nav-link" href="{{ route('register') }}">Zarejestruj się... </a>
                 </li>
             @endif
             @if (Auth::check() && Auth::user()->role_id == 2)

@@ -19,10 +19,15 @@ class CandyOrderSeeder extends Seeder
          $candies = Candy::all();
  
          $orders->each(function ($order) use ($candies) {
-             $order->candies()->attach(
-                 $candies->random(rand(1, 5))->pluck('id')->toArray(),
-                 ['quantity' => rand(1, 10)]
-             );
-         });
+            $candyIds = $candies->random(rand(1, 5))->pluck('id')->toArray();
+            $price = rand(1399, 2999) / 100;
+            $order->candies()->attach(
+                $candyIds,
+                [
+                    'quantity' => rand(1, 10),
+                    'price' => $price
+                ]
+            );
+        });
      }
 }
