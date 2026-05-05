@@ -22,9 +22,9 @@ Głównym celem było opanowanie architektury **MVC (Model-View-Controller)** or
 2. Zainstaluj **Composer**.
 3. W panelu XAMPP uruchom moduły **Apache** oraz **MySQL**.
 4. Sklonuj repozytorium:
-   ```bash
-   git clone [https://github.com/ewelinakaniewska/slodycze-na-wage.git](https://github.com/ewelinakaniewska/slodycze-na-wage.git)
-   ```
+```bash
+git clone https://github.com/ewelinakaniewska/slodycze-na-wage.git
+```
 5. Przejdź do katalogu projektu i uruchom przygotowany skrypt automatyzujący:
 ```bash
 start.bat
