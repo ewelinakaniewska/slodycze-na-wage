@@ -15,7 +15,7 @@ Projekt aplikacji webowej typu e-commerce stworzony w ramach nauki frameworka La
 *   **Responsywny Interfejs:** UI dostosowany do urządzeń mobilnych dzięki wykorzystaniu Bootstrapa.
 
 ## Cel projektu
-Głównym celem było opanowanie architektury **MVC (Model-View-Controller)** oraz przećwiczenie komunikacji między frontendem a backendem. Projekt pozwolił mi na praktyczne zastosowanie wiedzy zdobytej podczas studiów na **Uniwersytecie Rzeszowskim**.
+Głównym celem było opanowanie architektury **MVC (Model-View-Controller)** oraz przećwiczenie komunikacji między frontendem a backendem. Projekt pozwolił mi na praktyczne zastosowanie wiedzy zdobytej podczas studiów.
 
 ## Instalacja i uruchomienie
 1. Zainstaluj **XAMPP** na dysku systemowym i dodaj PHP do zmiennych środowiskowych.
