@@ -37,4 +37,4 @@ php artisan serve
 7. W pasku adresu przeglądarki wpisz: http://127.0.0.1:8000
 
 ---
-*Projekt zrealizowany w celach edukacyjnych (*
+*Projekt zrealizowany w celach edukacyjnych*
