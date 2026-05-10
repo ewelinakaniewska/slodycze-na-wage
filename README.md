@@ -47,5 +47,10 @@ php artisan serve
 ```
 7. W pasku adresu przeglądarki wpisz: http://127.0.0.1:8000
 
+Konta testowe
+| Rola użytkownika | Adres E-mail | Hasło |
+| :--- | :--- | :--- |
+| **Administrator** | `jan@email.com` | `1234` |
+| **Klient** | `marta@email.com` | `1234` |
 ---
 *Projekt zrealizowany w celach edukacyjnych*
