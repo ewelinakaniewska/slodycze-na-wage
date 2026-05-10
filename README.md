@@ -1,5 +1,7 @@
 # Sklep ze słodyczami na wagę (E-commerce Project)
 
+<img width="1709" height="996" alt="obraz" src="https://github.com/user-attachments/assets/39b718b1-0833-4b20-853b-0f5791b132a3" />
+
 Projekt aplikacji webowej typu e-commerce stworzony w ramach nauki frameworka Laravel oraz zarządzania relacyjnymi bazami danych. Aplikacja symuluje proces zakupowy w sklepie ze słodyczami, kładąc nacisk na logikę obliczeniową produktów sprzedawanych na wagę.
 
 ## Technologie
