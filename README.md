@@ -11,11 +11,11 @@ Projekt aplikacji webowej typu e-commerce stworzony w ramach nauki frameworka La
 ## Główne funkcjonalności
 *   **System CRUD:** Pełne zarządzanie asortymentem sklepu (dodawanie, edycja, usuwanie produktów).
 *   **Logika wagowa:** Implementacja przeliczników cenowych w zależności od masy produktu.
-*   **Katalog produktów:** Dynamiczne wyświetlanie dostępnych słodyczy z podziałem na kategorie.
+*   **Katalog produktów:** Dynamiczne wyświetlanie dostępnych słodyczy.
 *   **Responsywny Interfejs:** UI dostosowany do urządzeń mobilnych dzięki wykorzystaniu Bootstrapa.
 
 ## Cel projektu
-Głównym celem było opanowanie architektury **MVC (Model-View-Controller)** oraz przećwiczenie komunikacji między frontendem a backendem. Projekt pozwolił mi na praktyczne zastosowanie wiedzy zdobytej podczas studiów.
+Głównym celem było opanowanie architektury **MVC (Model-View-Controller)** oraz przećwiczenie komunikacji między frontendem a backendem. Projekt pozwolił na praktyczne zastosowanie wiedzy zdobytej podczas studiów.
 
 ## Instalacja i uruchomienie
 1. Zainstaluj **XAMPP** na dysku systemowym i dodaj PHP do zmiennych środowiskowych.
