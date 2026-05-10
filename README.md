@@ -20,14 +20,22 @@ Głównym celem było opanowanie architektury **MVC (Model-View-Controller)** or
 ## Instalacja i uruchomienie
 1. Zainstaluj **XAMPP** na dysku systemowym i dodaj PHP do zmiennych środowiskowych.
 2. Zainstaluj **Composer**.
-3. W panelu XAMPP uruchom moduły **Apache** oraz **MySQL**.
-4. Sklonuj repozytorium:
+3. Zauktualizuj biblioteki:
+```bash
+composer update
+```
+4. W panelu XAMPP uruchom moduły **Apache** oraz **MySQL**.
+5. Sklonuj repozytorium:
 ```bash
 git clone https://github.com/ewelinakaniewska/slodycze-na-wage.git
 ```
 5. Przejdź do katalogu projektu i uruchom przygotowany skrypt automatyzujący:
 ```bash
 start.bat
+```
+lub 
+```bash
+start.sh
 ```
 Skrypt ten automatycznie przygotuje bazę danych i zależności do działania aplikacji.
 6. Uruchom serwer deweloperski Laravela:
