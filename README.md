@@ -4,7 +4,7 @@ Projekt aplikacji webowej typu e-commerce stworzony w ramach nauki frameworka La
 
 Projekt jest dostępny pod adresem: https://slodycze-na-wage-production.up.railway.app/
 
-<img width="1709" height="996" alt="obraz" src="https://github.com/user-attachments/assets/39b718b1-0833-4b20-853b-0f5791b132a3" />
+![Podgląd aplikacji](public/screen.png)
 
 ## Technologie
 *   **Backend:** PHP 8.x, Laravel
