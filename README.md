@@ -38,6 +38,7 @@ lub
 start.sh
 ```
 Skrypt ten automatycznie przygotuje bazę danych i zależności do działania aplikacji.
+
 6. Uruchom serwer deweloperski Laravela:
 ```bash
 php artisan serve
